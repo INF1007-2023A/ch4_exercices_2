@@ -3,16 +3,6 @@
 
 import random
 
-def is_even_len(string):
-	return len(string) % 2 == 0
-
-
-def get_num_char(string, char):
-	num_char = 0
-	for c in string:
-		num_char += 1 if c == char else 0
-	return num_char
-
 
 def get_first_part_of_name(name):
 	# Extraire le premier prénom
@@ -21,7 +11,6 @@ def get_first_part_of_name(name):
 	capitalized = first_part[0].upper() + first_part[1:].lower()
 	# Faire 'Bonjour, <leNom>'
 	return "Bonjour, " + capitalized
-
 
 def get_random_sentence(animals, adjectives, fruits):
 	basic_sentence = "Aujourd’hui, j’ai vu un %s s’emparer d’un panier %s plein de %s."
@@ -41,15 +30,22 @@ def get_random_sentence(animals, adjectives, fruits):
 
 	return basic_sentence % tuple(words)
 
+def encrypt(text, shift):
+	result = ""
+	for letter in text:
+		encrypted_letter = letter
+		if letter.isalpha():
+			index = ord(letter.upper()) - ord("A")
+			encrypted_index = (index + shift) % 26
+			encrypted_letter = chr(ord("A") + encrypted_index)
+		result += encrypted_letter
+	return result
+
+def decrypt(encrypted_text, shift):
+	return encrypt(encrypted_text, -shift)
+
 
 if __name__ == "__main__":
-	spam = "Bonjour!"
-	parity = "pair" if is_even_len(spam) else "impair"
-	print(f"Le nombre de caractère dans la chaine '{spam}' est {parity}.")
-
-	eggs = "Hello, world!"
-	print(f"Le nombre d'occurrence de l dans '{eggs}' est : {get_num_char(eggs, 'l')}.")
-
 	parrot = "jEaN-MARC"
 	print(f"Pour {parrot}, on a '{get_first_part_of_name(parrot)}'.")
 
@@ -57,3 +53,8 @@ if __name__ == "__main__":
 	adjectives = ("rouge", "officiel", "lourd")
 	fruits = ("pommes", "kiwis", "mangue")
 	print(get_random_sentence(animals, adjectives, fruits))
+	
+	print(encrypt("ABC", 1))
+	print(encrypt("abc 123 XYZ", 3))
+	print(decrypt("DEF 123 ABC", 3))
+

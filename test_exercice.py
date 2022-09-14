@@ -9,40 +9,6 @@ import exercice
 
 
 class TestExercice(unittest.TestCase):
-	def test_is_even_len(self):
-		values = [
-			"Spam & eggs",
-			"'Tis but a scratch!",
-			"This parrot is no more"
-		]
-		expected = [
-			False,
-			False,
-			True
-		]
-		output = [exercice.is_even_len(v) for v in values]
-
-		self.assertListEqual(
-			output,
-			expected,
-			"Mauvaise identification de la parité de la longueur de la chaine."
-		)
-
-	def test_get_num_char(self):
-		values = [
-			("Who goes there?", "e"),
-			("It is I, Arthur, son of Uther Pendragon", "a"),
-			("King of the Brittons, defeater of the Saxons", "t")
-		]
-		expected = [v[0].count(v[1]) for v in values]
-		output = [exercice.get_num_char(v[0], v[1]) for v in values]
-
-		self.assertListEqual(
-			output,
-			expected,
-			"Mauvais calcul du nombre d'occurences du caractère."
-		)
-
 	def test_get_first_part_of_name(self):
 		values = [
 			"Marie-Christine",
@@ -75,6 +41,25 @@ class TestExercice(unittest.TestCase):
 		self.assertTrue(
 			is_random,
 			"Phrases pas aléatoires."
+		)
+
+	def test_encrypt(self):
+		values = [
+			("ABC", 1),
+			("abc 123 DEF", 2),
+			("xyz", 3)
+		]
+		expected = [
+			"BCD",
+			"CDE 123 FGH",
+			"ABC"
+		]
+
+		output = [exercice.encrypt(*v) for v in values]
+		self.assertListEqual(
+			output,
+			expected,
+			"Mauvaise code de César."
 		)
 
 
