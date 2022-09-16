@@ -16,8 +16,6 @@ def decrypt(encrypted_text, shift):
 	return ""
 
 
-
-
 if __name__ == "__main__":
 	parrot = "jEaN-MARC"
 	print(f"Pour {parrot}, on a '{get_first_part_of_name(parrot)}'.")
